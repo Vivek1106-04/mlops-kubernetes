@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: metaflow-dataflow-pod
+spec:
+  restartPolicy: Never  # run only once
+  containers:
+  - name: metaflow-sample-container
+    image: pipeline
+    imagePullPolicy: Never
+    env:
+      - name: POSTGRES_HOST
+        value: "10.244.0.7"
+      - name: POSTGRES_PASSWORD
+        value: "grCNmXF1AX"
+    # command: ["/bin/sh"]
+    # args: ["-c", "sleep infinity"]  # better for debugging
+    command: ["python"]
+    args: ["app/dataflow.py", "run"]

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: metaflow-modelflow-pod
+spec:
+  restartPolicy: Never  # run only once
+  containers:
+  - name: metaflow-container
+    image: pipeline
+    imagePullPolicy: Never
+    env:
+    - name: MINIO_ENDPOINT
+      value: "http://10.244.0.18:9000"
+    command: ["python"]
+    args: ["app/modelflow.py", "run"]
